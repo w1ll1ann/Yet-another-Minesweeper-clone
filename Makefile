@@ -3,7 +3,7 @@ CFLAGS = -std=c++11 -Wall -Wextra
 
 SRC  = src
 BIN  = bin
-EXEC = $(BIN)/minesweep
+EXEC = $(BIN)/minesweeper
 
 all: $(BIN) $(EXEC)
 
