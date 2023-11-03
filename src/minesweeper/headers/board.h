@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <random>
+#include <string>
 #include <iostream>
 #include <algorithm>
 
@@ -17,18 +18,19 @@ namespace Minesweeper {
     class Board {
         public:
             Board();
+            Board(std::pair <int, int> gridSize, int numberOfMines);
+
             void draw();
             void drawAll();
         private:
             std::vector <std::pair<int, int>> minesPositions;
             std::vector <std::vector <Cell>> grid;
 
-            void drawTop();
-
-            void setGrid();
+            void setGrid(std::pair <int, int> gridSize);
             void generateMines(int numberOfMines);
-            int countNearbyMines(std::pair<int, int> cellPosition);
             void setNearbyMinesCellsValues();
+
+            int countNearbyMines(std::pair<int, int> cellPosition);
     };
 }
 

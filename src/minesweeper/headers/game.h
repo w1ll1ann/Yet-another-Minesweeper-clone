@@ -8,6 +8,8 @@ namespace Minesweeper {
     class Game {
         public:
             Game();
+            Game(std::pair <int, int> gridSize, int numberOfMines);
+
             void run();
         private:
             Board board;

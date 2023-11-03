@@ -6,6 +6,12 @@ Game::Game() {
 
 }
 
-void Game::run() {
+Game::Game(std::pair <int, int> gridSize, int numberOfMines) {
+    board = Board(gridSize, numberOfMines);
+}
 
+void Game::run() {
+    board.draw();
+    std::cout << '\n';
+    board.drawAll();
 }
