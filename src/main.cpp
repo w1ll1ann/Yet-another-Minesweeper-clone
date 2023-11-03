@@ -3,7 +3,7 @@
 void printHelp() {
     std::cout << "To start Minesweeper: ./minesweeper [command]\n\n";
 
-    std::cout << "<Options to command>\n";
+    std::cout << "<Command options>\n";
     std::cout << "    [easy | normal | hard] to start the game with said difficult option\n";
     std::cout << "        [easy]  :  8 x  8 Grid, 10 mines\n";
     std::cout << "        [normal]: 16 x 16 Grid, 40 mines\n";
