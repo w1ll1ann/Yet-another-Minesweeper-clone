@@ -9,6 +9,13 @@
 #include "cell.h"
 
 namespace Minesweeper {
+    struct Cell {
+        bool isRevealed {false};
+        bool isMine {false};
+
+        int nearbyMines {0};
+    };
+
     class Board {
         public:
             Board();
