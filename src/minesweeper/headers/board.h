@@ -2,7 +2,9 @@
 #define BOARD_H
 
 #include <vector>
+#include <random>
 #include <iostream>
+#include <algorithm>
 
 #include "cell.h"
 
@@ -12,7 +14,13 @@ namespace Minesweeper {
             Board();
             void draw();
         private:
-            std::vector < std::vector < Cell > > grid;
+            std::vector <std::pair<int, int>> minesPositions;
+            std::vector <std::vector <Cell>> grid;
+
+            void setGrid();
+            void generateMines(int numberOfMines);
+            int countNearbyMines(std::pair<int, int> cellPosition);
+            void setNearbyMinesCellsValues();
     };
 }
 
