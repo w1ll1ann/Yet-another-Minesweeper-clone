@@ -22,7 +22,7 @@ $(OBJ):
 $(OBJ)/%.o: $(MSW)/%.cpp $(HDR)/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(EXEC): $(OBJS)
+$(EXEC): $(OBJS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) $(OBJS) $(SRC)/main.cpp -o $@
 
 clean:
