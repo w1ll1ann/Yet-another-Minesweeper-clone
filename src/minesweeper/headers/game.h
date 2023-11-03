@@ -14,6 +14,13 @@ namespace Minesweeper {
         private:
             Board board;
             Player player;
+
+            std::string gameOverMessage = redText + "A mine has detonated!!! Game Over!!!" + defaultText;
+
+            bool isGameOver();
+
+            void playGame();
+            void endGame();
     };
 }
 
