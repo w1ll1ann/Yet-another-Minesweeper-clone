@@ -2,14 +2,35 @@
 
 using namespace Minesweeper;
 
-void Player::addScore(int score) {
-    this->score += score;
-}
-
 int Player::getScore() {
     return score;
 }
 
-void Player::input() {
+bool Player::input(Board &board) {
+    std::pair <int, int> cellPosition;
 
+    std::cout << "Insert a coordinate[I J]\n";
+    std::cout << "> ";
+
+    std::cin >> cellPosition.first >> cellPosition.second;
+
+    std::pair <int, int> boardDimention = board.getGridDimention();
+
+    if ((cellPosition.first  < 1) 
+    ||  (cellPosition.first  > boardDimention.first) 
+    ||  (cellPosition.second < 1)
+    ||  (cellPosition.second > boardDimention.second)) {
+        std::cerr << redText << "Invalid cell position!\n" << defaultText;
+        return false;
+    }
+
+    if (board.hasCellBeenRevealed(cellPosition)) {
+        std::cerr << redText << "This cell has already been revealed!\n" << defaultText;
+        return false;
+    }
+
+    score += board.revealCell(cellPosition);
+    std::cout << "\n";
+
+    return true;
 }

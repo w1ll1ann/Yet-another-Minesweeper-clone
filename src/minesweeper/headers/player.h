@@ -6,11 +6,8 @@
 namespace Minesweeper {
     class Player {
         public:
-            void addScore(int score);
             int getScore();
-
-            void input();
-
+            bool input(Board &board);
         private:
             int score {0};
     };
