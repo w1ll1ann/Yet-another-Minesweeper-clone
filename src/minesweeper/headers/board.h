@@ -6,8 +6,6 @@
 #include <iostream>
 #include <algorithm>
 
-#include "cell.h"
-
 namespace Minesweeper {
     struct Cell {
         bool isRevealed {false};
