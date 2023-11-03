@@ -17,19 +17,12 @@ Board::Board(std::pair <int, int> gridSize, int numberOfMines) {
 
 void Board::draw() {
     std::cout << "MS ";
-    for (unsigned int i = 0; i < grid[0].size() - 2; i++)
-        if (i < 10)
-            std::cout << "0" + std::to_string(i) << " ";
-        else
-            std::cout << i << " ";
+    for (unsigned int i = 1; i < grid[0].size() - 1; i++)
+        drawGridNumbers(i);
     std::cout << "J\n";
 
     for (unsigned int i = 1; i < grid.size() - 1; i++) {
-        if (i < 10)
-            std::cout << "0" + std::to_string(i - 1) << "  ";
-        else
-            std::cout << i << "  ";
-
+        drawGridNumbers(i);
         for (unsigned int j = 1; j < grid[i].size() - 1; j++)
             if (!grid[i][j].isRevealed)
                 std::cout << "-" << "  ";
@@ -47,8 +40,10 @@ void Board::draw() {
 
 void Board::revealAll() {
     for (unsigned int i = 0; i < grid.size(); i++)
-        for (unsigned int j = 0; j < grid[i].size(); j++)
+        for (unsigned int j = 0; j < grid[i].size(); j++) {
             grid[i][j].isRevealed = true;
+            revealedCells++;
+        }
 }
 
 void Board::revealMines() {
@@ -64,7 +59,7 @@ int Board::revealCell(std::pair <int, int> cellPosition) {
     revealedCells++;
 
     if (grid[cellPosition.first][cellPosition.second].isMine) {
-        hasMineBeenFound = true;
+        aMineHasBeenFound = true;
         return 0;
     }
 
@@ -88,7 +83,22 @@ bool Board::hasCellBeenRevealed(std::pair <int, int> cellPosition) {
 }
 
 bool Board::hasAllCellsBeenRevealed() {
-    return (unsigned)revealedCells == (totalCells - minesPositions.size()); 
+    return (unsigned)revealedCells >= (totalCells - minesPositions.size()); 
+}
+
+bool Board::hasMineBeenFound() {
+    return aMineHasBeenFound;
+}
+
+std::pair <int, int> Board::getGridDimention() {
+    return {grid.size(), grid[0].size()};
+}
+
+void Board::drawGridNumbers(int number) {
+    if (number < 10)
+        std::cout << "0" + std::to_string(number) << " ";
+    else
+        std::cout << number << " ";
 }
 
 void Board::setGrid(std::pair <int, int> gridSize) {

@@ -36,14 +36,20 @@ namespace Minesweeper {
             bool hasCellBeenRevealed(std::pair <int, int> cellPosition);
             bool hasAllCellsBeenRevealed();
 
+            bool hasMineBeenFound();
+
+            std::pair <int, int> getGridDimention();
+
         private:
             int revealedCells {0};
             int totalCells {0};
 
-            bool hasMineBeenFound {false};
+            bool aMineHasBeenFound {false};
 
             std::vector <std::pair<int, int>> minesPositions;
             std::vector <std::vector <Cell>> grid;
+
+            void drawGridNumbers(int number);
 
             void setGrid(std::pair <int, int> gridSize);
             void setOutOfBoundsCells();
