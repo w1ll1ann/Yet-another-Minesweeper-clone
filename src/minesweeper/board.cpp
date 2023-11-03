@@ -9,7 +9,37 @@ Board::Board() {
 }
 
 void Board::draw() {
+    drawTop();
+    for (unsigned int i = 1; i < grid.size() - 1; i++) {
+        std::cout << i - 1 << " ";
+        for (unsigned int j = 1; j < grid[i].size() - 1; j++)
+            if (!grid[i][j].isRevealed)
+                std::cout << "- ";
+            else
+                std::cout << grid[i][j].nearbyMines << " ";
+        std::cout << "\n";
+    }
+}
 
+void Board::drawAll() {
+    drawTop();
+    for (unsigned int i = 1; i < grid.size() - 1; i++) {
+        std::cout << i - 1 << " ";
+        for (unsigned int j = 1; j < grid[i].size() - 1; j++)
+            if (grid[i][j].isMine)
+                std::cout << "X ";
+            else
+                std::cout << grid[i][j].nearbyMines << " ";
+
+        std::cout << "\n";
+    }
+}
+
+void Board::drawTop() {
+    std::cout << "  ";
+    for (unsigned int i = 1; i < grid.size() - 1; i++)
+        std::cout << i - 1 << " ";
+    std::cout << "\n";
 }
 
 void Board::setGrid() {

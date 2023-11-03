@@ -13,9 +13,12 @@ namespace Minesweeper {
         public:
             Board();
             void draw();
+            void drawAll();
         private:
             std::vector <std::pair<int, int>> minesPositions;
             std::vector <std::vector <Cell>> grid;
+
+            void drawTop();
 
             void setGrid();
             void generateMines(int numberOfMines);
