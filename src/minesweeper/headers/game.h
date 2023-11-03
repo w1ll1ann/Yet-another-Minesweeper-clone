@@ -7,7 +7,7 @@
 namespace Minesweeper {
     class Game {
         public:
-            Game();
+            Game() = default;
             Game(std::pair <int, int> gridSize, int numberOfMines);
 
             void run();
