@@ -1,6 +1,7 @@
 #include "minesweeper/headers/game.h"
 
-void printHelp() {
+void printHelp()
+{
     std::cout << "To start Minesweeper: ./minesweeper [command]\n\n";
 
     std::cout << "<Command options>\n";
@@ -14,7 +15,8 @@ void printHelp() {
     std::cout << "    [credits]: show the game's credits\n";
 }
 
-void printManual() {
+void printManual()
+{
     std::cout << "<How to play Yet Another Minesweep clone>\n\n";
 
     std::cout << "The game starts with a board full with unrevealed cells.\n";
@@ -28,29 +30,33 @@ void printManual() {
     std::cout << greenText <<"Good luck :)\n" << defaultText;
 }
 
-void printCredits() {
+void printCredits()
+{
     std::cout << "Trabalho prático - Engenharia de Software II - 2023_2\n";
     std::cout << yellowText << "Yet another Minesweeper clone - version 0.1\n\n" << defaultText;
     std::cout << "Authors: Luana Oliveira\n"; 
     std::cout << "         Willian Braga \n";
 }
 
-int main(int argc, char *argv[]) {
-
-    if (argc != 2) {
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
         std::cerr << redText << "Incorrect number of arguments!\n\n" << defaultText;
         printHelp();
         return 0;
     }
 
-    std::string command {argv[1]};
+    const std::string command {argv[1]};
 
-    if (command == "manual") {
+    if (command == "manual")
+    {
         printManual();
         return 0;
     }
 
-    if (command == "credits") {
+    if (command == "credits")
+    {
         printCredits();
         return 0;
     }
@@ -63,7 +69,8 @@ int main(int argc, char *argv[]) {
         minesweeper = Minesweeper::Game({16, 16}, 40);
     else if (command == "hard")
         minesweeper = Minesweeper::Game({16, 30}, 90);
-    else {
+    else
+    {
         std::cerr << redText << "Invalid command!\n\n" << defaultText;
         printHelp();
         return 0;

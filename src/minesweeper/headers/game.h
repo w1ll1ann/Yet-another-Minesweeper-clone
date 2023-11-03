@@ -4,11 +4,13 @@
 #include "board.h"
 #include "player.h"
 
-namespace Minesweeper {
-    class Game {
+namespace Minesweeper
+{
+    class Game
+    {
         public:
             Game() = default;
-            Game(std::pair <int, int> gridSize, int numberOfMines);
+            Game(const std::pair <int, int> &gridSize, int numberOfMines);
 
             void run();
         private:

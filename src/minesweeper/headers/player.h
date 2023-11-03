@@ -3,8 +3,10 @@
 
 #include "board.h"
 
-namespace Minesweeper {
-    class Player {
+namespace Minesweeper
+{
+    class Player
+    {
         public:
             int getScore();
             bool input(Board &board);

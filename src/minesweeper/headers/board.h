@@ -13,32 +13,35 @@ const std::string greenText {"\033[92m"};
 const std::string yellowText {"\033[93m"};
 const std::string defaultText {"\033[m"};
 
-namespace Minesweeper {
-    struct Cell {
+namespace Minesweeper
+{
+    struct Cell
+    {
         bool isRevealed {false};
         bool isMine {false};
 
         int nearbyMines {0};
     };
 
-    class Board {
+    class Board
+    {
         public:
             Board();
-            Board(std::pair <int, int> gridSize, int numberOfMines);
+            Board(const std::pair <int, int> &gridSize, int numberOfMines);
 
             void draw();
 
             void revealAll();
             void revealMines();
 
-            int revealCell(std::pair <int, int> cellPosition);
+            int revealCell(const std::pair <int, int> &cellPosition);
 
-            bool hasCellBeenRevealed(std::pair <int, int> cellPosition);
+            bool hasCellBeenRevealed(const std::pair <int, int> &cellPosition);
             bool hasAllCellsBeenRevealed();
 
             bool hasMineBeenFound();
 
-            std::pair <int, int> getGridDimention();
+            std::pair <int, int> getGridDimensions();
 
         private:
             int revealedCells {0};
@@ -51,12 +54,12 @@ namespace Minesweeper {
 
             void drawGridNumbers(int number);
 
-            void setGrid(std::pair <int, int> gridSize);
+            void setGrid(const std::pair <int, int> &gridSize);
             void setOutOfBoundsCells();
             void generateMines(int numberOfMines);
             void setNearbyMinesCellsValues();
 
-            int countNearbyMines(std::pair<int, int> cellPosition);
+            int countNearbyMines(const std::pair<int, int> &cellPosition);
     };
 }
 

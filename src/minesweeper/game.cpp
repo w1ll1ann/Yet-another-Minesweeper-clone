@@ -2,19 +2,23 @@
 
 using namespace Minesweeper;
 
-Game::Game(std::pair <int, int> gridSize, int numberOfMines) {
+Game::Game(const std::pair <int, int> &gridSize, int numberOfMines)
+{
     board = Board(gridSize, numberOfMines);
 }
 
-void Game::run() {
+void Game::run()
+{
     std::cout << yellowText << "Yet another Minesweeper clone - version 0.1\n\n" << defaultText;
 
     playGame();
     endGame();
 }
 
-bool Game::isGameOver() {
-    if (board.hasAllCellsBeenRevealed()) {
+bool Game::isGameOver()
+{
+    if (board.hasAllCellsBeenRevealed())
+    {
         gameOverMessage = greenText + "You did it!!! You revealed all cells!!! Congratulations!!!" + defaultText;
         return true;
     }
@@ -25,9 +29,11 @@ bool Game::isGameOver() {
     return false;
 }
 
-void Game::playGame() {
+void Game::playGame()
+{
     int turn {1};
-    while (true) {
+    while (true)
+    {
         std::cout << yellowText << "[Turn " << turn << "]\n" << defaultText;
 
         board.draw();
@@ -42,7 +48,8 @@ void Game::playGame() {
     }
 }
 
-void Game::endGame() {
+void Game::endGame()
+{
     board.revealMines();
     board.draw();
 
