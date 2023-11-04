@@ -28,14 +28,7 @@ void Board::draw()
     {
         drawGridNumbers(i);
         for (unsigned j = 1; j < grid[i].size() - 1; j++)
-            if (!grid[i][j].isRevealed)
-                std::cout << "-" << "  ";
-            else if (grid[i][j].isMine)
-                std::cout << redText << "X" << defaultText << "  ";
-            else if (grid[i][j].nearbyMines == 0)
-                std::cout << greyText << grid[i][j].nearbyMines << defaultText << "  ";
-            else
-                std::cout << yellowText << grid[i][j].nearbyMines << defaultText << "  ";
+            drawGridCell(grid[i][j]);
         std::cout << "\n";
     }
 
@@ -114,6 +107,18 @@ void Board::drawGridNumbers(int number)
         std::cout << "0" + std::to_string(number) << " ";
     else
         std::cout << number << " ";
+}
+
+void Board::drawGridCell(Cell cell)
+{
+    if (!cell.isRevealed)
+        std::cout << "-" << "  ";
+    else if (cell.isMine)
+        std::cout << redText << "X" << defaultText << "  ";
+    else if (cell.nearbyMines == 0)
+        std::cout << greyText << cell.nearbyMines << defaultText << "  ";
+    else
+        std::cout << yellowText << cell.nearbyMines << defaultText << "  ";
 }
 
 void Board::setGrid(const std::pair <int, int> &gridSize)
