@@ -35,6 +35,7 @@ namespace Minesweeper
             std::vector <std::vector <Cell>> grid;
 
             void drawGridNumbers(int number);
+            void drawGridCell(Cell cell);
 
             void setGrid(const std::pair <int, int> &gridSize);
             void setOutOfBoundsCells();
