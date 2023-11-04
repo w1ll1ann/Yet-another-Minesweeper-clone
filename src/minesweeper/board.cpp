@@ -140,14 +140,14 @@ void Board::setOutOfBoundsCells()
 
 void Board::generateMines(int numberOfMines)
 {
-    std::random_device rd;
-    std::uniform_int_distribution <int> distI(1, grid.size() - 2);
-    std::uniform_int_distribution <int> distJ(1, grid[0].size() - 2);
+    std::random_device randomEngine;
+    std::uniform_int_distribution <int> distbutionI(1, grid.size() - 2);
+    std::uniform_int_distribution <int> distbutionJ(1, grid[0].size() - 2);
 
     int distinctPositions = 0;
     while (distinctPositions < numberOfMines)
     {
-        std::pair <int, int> minePosition = {distI(rd), distJ(rd)};
+        std::pair <int, int> minePosition = {distbutionI(randomEngine), distbutionJ(randomEngine)};
         if (std::find(minesPositions.begin(), minesPositions.end(), minePosition) == minesPositions.end())
         {
             grid[minePosition.first][minePosition.second].isMine = true;
