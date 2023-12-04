@@ -3,6 +3,7 @@
 
 //Unit tests
 
+//1
 TEST_CASE("testing the board's default constructor", "[board]")
 {
     Minesweeper::Board board;
@@ -10,6 +11,7 @@ TEST_CASE("testing the board's default constructor", "[board]")
     REQUIRE(board.getGridDimensions() == std::pair <int, int>{10, 10});
 }
 
+//2
 TEST_CASE("testing if the board grid size is defined correctly", "[board]")
 {
     Minesweeper::Board board({16, 16}, 40);
@@ -17,13 +19,15 @@ TEST_CASE("testing if the board grid size is defined correctly", "[board]")
     REQUIRE(board.getGridDimensions() == std::pair <int, int>{18, 18});
 }
 
-TEST_CASE("testing if the total cell value is defined correctly", "[board]")
+//3
+TEST_CASE("testing if the total cells value is defined correctly", "[board]")
 {
     Minesweeper::Board board({16, 30}, 10);
 
     REQUIRE(board.getTotalCells() == 480);
 }
 
+//4
 TEST_CASE("testing if the out of bounds cells are defined correctly", "[board]")
 {
     Minesweeper::Board board({8, 8}, 10);
@@ -38,15 +42,7 @@ TEST_CASE("testing if the out of bounds cells are defined correctly", "[board]")
     REQUIRE(board.hasCellBeenRevealed({9, 9}));
 }
 
-TEST_CASE("testing the reveal cell operation", "[board]")
-{
-    //A board without any mines
-    Minesweeper::Board board({8, 8}, 0);
-
-    //this action will reveal all cell in the board, recursively, and returns score 0
-    REQUIRE(board.revealCell({1, 1}) == 0);
-}
-
+//5
 TEST_CASE("testing the reveal all cells operation", "[board]")
 {
     Minesweeper::Board board;
@@ -56,6 +52,29 @@ TEST_CASE("testing the reveal all cells operation", "[board]")
     REQUIRE(board.hasAllCellsBeenRevealed());
 }
 
+//6
+TEST_CASE("testing the reveal cell operation on a board without mines", "[board]")
+{
+    //A board without any mines
+    Minesweeper::Board board({8, 8}, 0);
+
+    //this action will reveal all cells in the board, recursively
+    board.revealCell({1, 1});
+
+    REQUIRE(board.hasAllCellsBeenRevealed());
+}
+
+//7
+TEST_CASE("testing the reveal cell operation on a board full of mines", "[board]")
+{
+    Minesweeper::Board board({8, 8}, 64);
+
+    board.revealCell({1, 1});
+
+    REQUIRE(board.getRevealedCells() == 1);
+}
+
+//8
 TEST_CASE("testing the mine reveal check operation", "[board]")
 {
     Minesweeper::Board board;
@@ -65,6 +84,7 @@ TEST_CASE("testing the mine reveal check operation", "[board]")
     REQUIRE(board.hasMineBeenFound());
 }
 
+//9
 TEST_CASE("testing if all mines generated are in distinct positions", "[board]")
 {
     Minesweeper::Board board({8, 8}, 20);
@@ -76,22 +96,16 @@ TEST_CASE("testing if all mines generated are in distinct positions", "[board]")
     REQUIRE(std::adjacent_find(minesPositions.begin(), minesPositions.end()) == minesPositions.end());
 }
 
-TEST_CASE("testing if the player valid input is proccessed correctly", "[player]")
+//10
+TEST_CASE("testing the couting nearby cells operation", "[board]")
 {
-    Minesweeper::Board board;
-    Minesweeper::Player player;
+    Minesweeper::Board board({8, 8}, 64);
 
-    REQUIRE(player.input(board));
+    REQUIRE(board.countNearbyMines({1, 1}) == 4);
+    REQUIRE(board.countNearbyMines({2, 2}) == 9);
 }
 
-TEST_CASE("testing if the player invalid input is proccessed correctly", "[player]")
-{
-    Minesweeper::Board board;
-    Minesweeper::Player player;
-
-    REQUIRE_FALSE(player.input(board));
-}
-
+//11
 TEST_CASE("testing if the game board is setted correctly for the 3 main difficult settings", "[game]")
 {
     Minesweeper::Game minesweeper_0({8, 8}  , 10);
@@ -108,6 +122,7 @@ TEST_CASE("testing if the game board is setted correctly for the 3 main difficul
     REQUIRE(minesweeper_2.getBoard()->getMinesPositions().size() == 90);
 }
 
+//12
 TEST_CASE("testing the game win condition", "[game]")
 {
     Minesweeper::Game minesweeper;
@@ -116,6 +131,7 @@ TEST_CASE("testing the game win condition", "[game]")
     REQUIRE(minesweeper.isGameOver());
 }
 
+//13
 TEST_CASE("testing the game lose condition", "[game]")
 {
     Minesweeper::Game minesweeper;
@@ -124,7 +140,8 @@ TEST_CASE("testing the game lose condition", "[game]")
     REQUIRE(minesweeper.isGameOver());
 }
 
-TEST_CASE("testing if the game over win message is setted propely", "[game]")
+//14
+TEST_CASE("testing if the game over win message is defined propely", "[game]")
 {
     Minesweeper::Game minesweeper;
     minesweeper.getBoard()->revealAll();
@@ -134,12 +151,62 @@ TEST_CASE("testing if the game over win message is setted propely", "[game]")
     REQUIRE(minesweeper.getGameOverMessage() == (greenText + "You did it!!! You revealed all cells!!! Congratulations!!!" + defaultText));
 }
 
-TEST_CASE("testing if the game over lose message is setted propely", "[game]")
+//15
+TEST_CASE("testing if the game over lose message is defined propely", "[game]")
 {
     Minesweeper::Game minesweeper;
     minesweeper.getBoard()->revealMines();
 
     minesweeper.isGameOver();
+
+    REQUIRE(minesweeper.getGameOverMessage() == (redText + "A mine has detonated!!! Game Over!!!" + defaultText));
+}
+
+//Integration/System tests
+
+//1
+TEST_CASE("testing if the player valid input is proccessed correctly", "[player/board]")
+{
+    Minesweeper::Board board;
+    Minesweeper::Player player;
+
+    REQUIRE(player.input(board));
+}
+
+//2
+TEST_CASE("testing if the player invalid input by inserting a out of bounds cell position is proccessed correctly", "[player/board]")
+{
+    Minesweeper::Board board;
+    Minesweeper::Player player;
+
+    REQUIRE_FALSE(player.input(board));
+}
+
+//3
+TEST_CASE("testing if the player invalid input by inserting a revealed cell position is proccessed correctly", "[player/board]")
+{
+    Minesweeper::Board board;
+    Minesweeper::Player player;
+
+    board.revealAll();
+
+    REQUIRE_FALSE(player.input(board));
+}
+
+//4
+TEST_CASE("testing gameflow where the player is garanted to win", "[game/player]")
+{
+    Minesweeper::Game minesweeper({8, 8}, 0);
+    minesweeper.run();
+
+    REQUIRE(minesweeper.getGameOverMessage() == (greenText + "You did it!!! You revealed all cells!!! Congratulations!!!" + defaultText));
+}
+
+//5
+TEST_CASE("testing gameflow where the player is garanted to lose", "[game/player]")
+{
+    Minesweeper::Game minesweeper({8, 8}, 64);
+    minesweeper.run();
 
     REQUIRE(minesweeper.getGameOverMessage() == (redText + "A mine has detonated!!! Game Over!!!" + defaultText));
 }
