@@ -18,10 +18,14 @@ namespace Minesweeper
 
             int revealCell(const std::pair <int, int> &cellPosition);
 
+            int countNearbyMines(const std::pair<int, int> &cellPosition);
+
             bool hasCellBeenRevealed(const std::pair <int, int> &cellPosition);
             bool hasAllCellsBeenRevealed();
 
             bool hasMineBeenFound();
+
+            int getRevealedCells();
 
             int getTotalCells();
 
@@ -46,7 +50,7 @@ namespace Minesweeper
             void generateMines(int numberOfMines);
             void setNearbyMinesCellsValues();
 
-            int countNearbyMines(const std::pair<int, int> &cellPosition);
+
     };
 }
 

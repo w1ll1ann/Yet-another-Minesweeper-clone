@@ -9,14 +9,14 @@ Game::Game(const std::pair <int, int> &gridSize, int numberOfMines)
 
 bool Game::isGameOver()
 {
+    if (board.hasMineBeenFound())
+        return true;
+
     if (board.hasAllCellsBeenRevealed())
     {
         gameOverMessage = greenText + "You did it!!! You revealed all cells!!! Congratulations!!!" + defaultText;
         return true;
     }
-
-    if (board.hasMineBeenFound())
-        return true;
 
     return false;
 }

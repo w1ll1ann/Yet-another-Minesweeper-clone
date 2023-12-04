@@ -78,6 +78,18 @@ int Board::revealCell(const std::pair <int, int> &cellPosition)
     return accumulatedScore;
 }
 
+
+int Board::countNearbyMines(const std::pair<int, int> &cellPosition)
+{
+    int nearbyMines {0};
+    for (int i = -1; i <= 1; i++)
+        for (int j = -1; j <=1; j++)
+            if(grid[cellPosition.first + i][cellPosition.second + j].isMine)
+                nearbyMines++;
+
+    return nearbyMines;
+}
+
 bool Board::hasCellBeenRevealed(const std::pair <int, int> &cellPosition)
 {
     return grid[cellPosition.first][cellPosition.second].isRevealed;
@@ -91,6 +103,11 @@ bool Board::hasAllCellsBeenRevealed()
 bool Board::hasMineBeenFound()
 {
     return aMineHasBeenFound;
+}
+
+int Board::getRevealedCells()
+{
+    return revealedCells;
 }
 
 int Board::getTotalCells()
@@ -176,15 +193,4 @@ void Board::setNearbyMinesCellsValues()
         for (unsigned j = 1; j < grid[i].size() - 1; j++)
             if (!grid[i][j].isMine)
                 grid[i][j].nearbyMines = countNearbyMines({i, j});
-}
-
-int Board::countNearbyMines(const std::pair<int, int> &cellPosition)
-{
-    int nearbyMines {0};
-    for (int i = -1; i <= 1; i++)
-        for (int j = -1; j <=1; j++)
-            if(grid[cellPosition.first + i][cellPosition.second + j].isMine)
-                nearbyMines++;
-
-    return nearbyMines;
 }
