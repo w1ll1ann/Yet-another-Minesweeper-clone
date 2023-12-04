@@ -2,11 +2,6 @@
 
 using namespace Minesweeper;
 
-Board::Board()
-{
-    Board({8, 8}, 10);
-}
-
 Board::Board(const std::pair <int, int> &gridSize, int numberOfMines)
 {
     totalCells = gridSize.first * gridSize.second;
@@ -49,6 +44,8 @@ void Board::revealMines()
 {
     for (auto i : minesPositions)
         grid[i.first][i.second].isRevealed = true;
+
+    aMineHasBeenFound = true;
 }
 
 int Board::revealCell(const std::pair <int, int> &cellPosition)
@@ -96,9 +93,19 @@ bool Board::hasMineBeenFound()
     return aMineHasBeenFound;
 }
 
+int Board::getTotalCells()
+{
+    return totalCells;
+}
+
 std::pair <int, int> Board::getGridDimensions()
 {
     return {grid.size(), grid[0].size()};
+}
+
+std::vector <std::pair<int, int>> Board::getMinesPositions()
+{
+    return minesPositions;
 }
 
 void Board::drawGridNumbers(int number)

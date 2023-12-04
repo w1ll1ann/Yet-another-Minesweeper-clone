@@ -12,14 +12,19 @@ namespace Minesweeper
             Game() = default;
             Game(const std::pair <int, int> &gridSize, int numberOfMines);
 
+            bool isGameOver();
+
             void run();
+
+            Board* getBoard();
+
+            std::string getGameOverMessage();
+
         private:
             Board board;
             Player player;
 
             std::string gameOverMessage = redText + "A mine has detonated!!! Game Over!!!" + defaultText;
-
-            bool isGameOver();
 
             void playGame();
             void endGame();

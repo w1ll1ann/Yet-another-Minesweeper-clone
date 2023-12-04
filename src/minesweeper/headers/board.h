@@ -8,7 +8,7 @@ namespace Minesweeper
     class Board
     {
         public:
-            Board();
+            Board() : Board({8, 8}, 10) {}
             Board(const std::pair <int, int> &gridSize, int numberOfMines);
 
             void draw();
@@ -23,7 +23,11 @@ namespace Minesweeper
 
             bool hasMineBeenFound();
 
+            int getTotalCells();
+
             std::pair <int, int> getGridDimensions();
+
+            std::vector <std::pair<int, int>> getMinesPositions();
 
         private:
             int revealedCells {0};

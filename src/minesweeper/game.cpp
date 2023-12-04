@@ -7,14 +7,6 @@ Game::Game(const std::pair <int, int> &gridSize, int numberOfMines)
     board = Board(gridSize, numberOfMines);
 }
 
-void Game::run()
-{
-    std::cout << yellowText << "Yet another Minesweeper clone - version 0.1\n\n" << defaultText;
-
-    playGame();
-    endGame();
-}
-
 bool Game::isGameOver()
 {
     if (board.hasAllCellsBeenRevealed())
@@ -27,6 +19,24 @@ bool Game::isGameOver()
         return true;
 
     return false;
+}
+
+void Game::run()
+{
+    std::cout << yellowText << "Yet another Minesweeper clone - version 0.1\n\n" << defaultText;
+
+    playGame();
+    endGame();
+}
+
+Board* Game::getBoard()
+{
+    return &board;
+}
+
+std::string Game::getGameOverMessage()
+{
+    return gameOverMessage;
 }
 
 void Game::playGame()
